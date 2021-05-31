@@ -1,5 +1,5 @@
 <?php
-define('DB_NAME','pd925');
+define('DB_NAME','pv925');
 define('DB_USER','root');
 define('DB_PASSWORD','');
 define('DB_HOST','localhost');
