@@ -27,7 +27,7 @@
             <td><img style='width: 200px; height=200px;' src='{$row["image"]}' class='img-thumbnail' alt='Animal image'></td>
             <td><a class='btn btn-dark' href='editAnimal.php?id=${row["id"]}'>Edit  <i class='far fa-edit'></i></td>
             <td>
-                <button  onclick='loadDeleteModal(${row["id"]})' data-toggle='modal' data-target='#modalDelete' class='btn btn-danger' >Delete  <i class='fas fa-trash-alt'></i></button>
+                <button  onclick='loadDeleteModal(${row["id"]}, `${row["name"]}`)' data-toggle='modal' data-target='#modalDelete' class='btn btn-danger' >Delete  <i class='fas fa-trash-alt'></i></button>
             </td>
             </tr>";
         }
@@ -43,11 +43,11 @@
     </form>-->
 
 <script>
-    function loadDeleteModal(id)
+    function loadDeleteModal(id, name)
     {
         $(`#modalDeleteContent`).empty();
         $(`#modalDeleteContent`).append(`<div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete animal ${id}?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Delete animal ${name}?</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
