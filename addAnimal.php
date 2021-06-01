@@ -94,16 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <small class='text-danger' id="name_error" hidden>Name is required!</small>
                     <?php
                         if(isset($errors['name']))
-                            echo "<small class='text-danger'>{$errors['name']}</small>"
+                            echo "<small class='text-danger'>{$errameors['n']}</small>"
                     ?>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Select image to upload:</label>
 
                     <?php
-                        echo"<input class='form-control' type='file' name='fileToUpload' id='fileToUpload'>"
+                        echo"<input class='form-control d-none' type='file' name='fileToUpload' id='fileToUpload'>"
                     ?>
-
+                    <img src="/uploads/no-profile-photo.jpg" width="300px" id="img_upload" />
                     <?php
                     foreach ($file_loading_error as &$value) {
                         echo "<small class='text-danger'>$value</small>";
@@ -128,3 +128,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 <?php include "_footer.php"; ?>
+
+<script>
+    $(function () {
+       var $img_upload = $("#img_upload");
+       var $fileToUpload = $("#fileToUpload");
+        $img_upload.on("click", function() {
+            $fileToUpload.click();
+        });
+        $fileToUpload.on("change",function(e) {
+            //console.log();
+            const [file] = e.target.files;
+            if(file)
+            {
+                var reader = new FileReader();
+                reader.onload= function(event) {
+                    var data = event.target.result;
+                    $img_upload.attr("src", data);
+                    const cropper = new Cropper(
+                        document.getElementById("img_upload"), {
+                        aspectRatio: 1 / 1,
+                        crop(event) {
+                            console.log(event.detail.x);
+                            console.log(event.detail.y);
+                            console.log(event.detail.width);
+                            console.log(event.detail.height);
+                            console.log(event.detail.rotate);
+                            console.log(event.detail.scaleX);
+                            console.log(event.detail.scaleY);
+                        },
+                    });
+                }
+                reader.readAsDataURL(file);
+            }
+            //console.log(file);
+        });
+    });
+</script>
