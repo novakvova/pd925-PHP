@@ -23,6 +23,10 @@
                                          style="width:100%; cursor: pointer;"
                                          id="uploadImage"
                                          alt="hello">
+                                    <form id="formUpload" action="/cars/upload.php" method="post">
+
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -49,7 +53,12 @@
                uploader.remove();
            }
            uploader = $('<input type="file" name="workImage" accept="image/* style="display:none"/>');
+           $("#formUpload").html = uploader;
            uploader.click();
+           uploader.on("change", function() {
+               //обраний файл відпраляємо на сервер
+               $("#formUpload").submit();
+           });
        });
     });
 </script>
