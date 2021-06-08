@@ -9,6 +9,7 @@
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="home.php">Home</a>
                 <a class="nav-link active" aria-current="page" href="index.php">Animals</a>
+                <a class="nav-link active" aria-current="page" href="/cars/index.php">Авто</a>
                 <a class="nav-link" href="addAnimal.php">Add animal</a>
                 <a class="nav-link" href="loadFile.php">Test load image</a>
             </div>
