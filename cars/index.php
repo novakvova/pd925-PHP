@@ -10,7 +10,7 @@
     $command->execute();
     $row = $command->fetch(PDO::FETCH_ASSOC);
     $count_items = $row["count"];
-    $show_item=5;
+    $show_item=3;
     $page = 1;
     $count_pages=ceil($count_items/$show_item);
     if(isset($_GET["page"]))
@@ -55,9 +55,38 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <?php
+            $show_begin=13;
+            $active ="active";
+            $right_items = 8;
             for($i=1;$i<=$count_pages;$i++) {
-                echo "<li class='page-item'><a class='page-link' href='?page={$i}'>{$i}</a></li>";
+                $active="";
+                if($i==$page)
+                    $active="active";
+
+                if($page<=5 and $i<=$show_begin)  {
+                    echo "<li class='page-item {$active}'><a class='page-link' href='?page={$i}'>{$i}</a></li>";
+                }
+                if($page>5 && $page<9 && $i <= ($right_items+$page))
+                {
+                    echo "<li class='page-item {$active}'><a class='page-link' href='?page={$i}'>{$i}</a></li>";
+                }
+                if($page>=9)
+                {
+                    if($i<=3) {
+                        echo "<li class='page-item {$active}'><a class='page-link' href='?page={$i}'>{$i}</a></li>";
+                    }
+                    else if($i==4) {
+                        echo "<li class='page-item'><a class='page-link' href='?page={$i}'>...</a></li>";
+                    }
+                    else if(($page-4)<=$i && $i<=($page+5)) {
+                        echo "<li class='page-item {$active}'><a class='page-link' href='?page={$i}'>{$i}</a></li>";
+                    }
+                }
             }
+            $i--;
+            echo "<li class='page-item'><a class='page-link' href='?page={$i}'>...</a></li>";
+            echo "<li class='page-item'><a class='page-link' href='?page={$i}'>$i</a></li>";
+
             ?>
         </ul>
     </nav>
